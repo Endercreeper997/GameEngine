@@ -29,6 +29,8 @@ int main()
     SDL_Event e;
     bool quit = false;
 
+    //handle events
+
     // Define a rectangle
     SDL_FRect greenSquare{ 270, 190, 200, 200 };
 
