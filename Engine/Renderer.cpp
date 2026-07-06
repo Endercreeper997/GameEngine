@@ -73,9 +73,10 @@ namespace nu
         SDL_RenderRect(m_renderer, &rect);
     }
 
-    void Renderer::DrawLine()
+    //first 2 paramters are first point, next 2 are second point.
+    void Renderer::DrawLine(int x1, int y1, int x2, int y2)
     {
-        //SDL_RenderLine();
+        SDL_RenderLine(m_renderer, x1, y1, x2, y2);
         return;
     }
     

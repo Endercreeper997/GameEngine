@@ -2,9 +2,6 @@
 #include "Engine.h"
 #include "SDL3/SDL.h"
 
-#include <iostream>
-#include <vector>
-
 //Can use this to not have to type the namespace (like nu or std) every time. 
 //using namespace nu;
 
@@ -21,7 +18,7 @@ int main()
     nu::Vector2 vel{ 0.5f , 0.0f };
 
     std::vector<nu::Vector2> v;
-    nu::Vector2 v[300];
+    
 
     for (int i = 0; i < 300; i++) 
     {
@@ -68,11 +65,10 @@ int main()
 
         //TODO: do these 2 later
         renderer.SetColor(255, 255, 255, 255);
-        //renderer.
-        //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Set render draw color to white
-        //SDL_RenderDebugText(renderer, 30, 30, "Hello World!");
+        
 
         //TODO: make a line drawer. 
+        renderer.DrawLine(nu::RandomInt(1280), nu::RandomInt(1024), nu::RandomInt(1280), nu::RandomInt(1024));
 
 
         renderer.Present();

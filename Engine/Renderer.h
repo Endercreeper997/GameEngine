@@ -19,7 +19,7 @@ namespace nu
 		void DrawPoint(float x, float y);
 		void DrawFillRect(float x, float y, float w, float h);
 		void DrawRect(float x, float y, float w, float h);
-		void DrawLine();
+		void DrawLine(int x1, int y1, int x2, int y2);
 
 	private:
 		SDL_Window* m_window = nullptr;

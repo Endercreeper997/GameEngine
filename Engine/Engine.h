@@ -5,4 +5,8 @@
 
 #include "Renderer.h"
 
+#include <iostream>
+#include <vector>
+#include <string>
+
 void fnEngine();
