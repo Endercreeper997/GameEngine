@@ -41,6 +41,11 @@ namespace nu
         SDL_SetRenderDrawColor(m_renderer, r, g, b, a);
     }
 
+    void Renderer::SetColorFloat(float r, float g, float b, float a)
+    {
+        SDL_SetRenderDrawColorFloat(m_renderer, r, g, b, a);
+    }
+
     void Renderer::Clear()
     {
         SDL_RenderClear(m_renderer);
@@ -66,6 +71,12 @@ namespace nu
     {
         SDL_FRect rect{ x, y, w, h };
         SDL_RenderRect(m_renderer, &rect);
+    }
+
+    void Renderer::DrawLine()
+    {
+        //SDL_RenderLine();
+        return;
     }
     
 }
