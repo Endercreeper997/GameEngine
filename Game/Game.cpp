@@ -14,6 +14,9 @@ int main()
     nu::Renderer renderer;
     renderer.Initialize("Game Engine", 1280, 1024);
 
+    nu::Input input;
+    input.Initialize();
+
     //std::cout << sizeof(nu::Vector2) << std::endl;
     nu::Vector2 vel{ 0.5f , 0.0f };
 
@@ -26,6 +29,8 @@ int main()
         v.push_back({ nu::RandomFloat(1280), nu::RandomFloat(1024) });
     }
 
+    nu::Vector2 mousePosition;
+
 
 
     //handle events
@@ -35,6 +40,12 @@ int main()
 
     // Define a rectangle
     SDL_FRect greenSquare{ 270, 190, 200, 200 };
+
+
+
+
+
+
 
     //MAIN LOOP
     while (!quit) 
@@ -46,29 +57,46 @@ int main()
             {
                 quit = true;
             }
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.scancode == SDL_SCANCODE_ESCAPE)
+            {
+                quit = true;
+            }
         }
 
+        //engine update
+        input.Update();
+
+        if (input.GetKeyPressed(SDL_SCANCODE_Q)) std::cout << "pressed\n";
+        if (input.GetKeyDown(SDL_SCANCODE_Q)) std::cout << "down\n";
+        if (input.GetKeyReleased(SDL_SCANCODE_Q)) std::cout << "released\n";
+
+        if (input.GetButtonPressed(nu::Input::MouseButton::Left)) std::cout << "button pressed\n";
+        if (input.GetButtonDown(nu::Input::MouseButton::Left)) std::cout << "button down\n";
+        
+
+
         //RENDER
-        renderer.SetColor(0, 0, 0);
+        renderer.SetColorFloat(0.0f, 0.0f, 0.0f);
         renderer.Clear();
 
         for (int i = 0; i < v.size(); i++) 
         {
             renderer.SetColorFloat(nu::RandomFloat(), nu::RandomFloat(), nu::RandomFloat());
 
-            v[i] = v[i] + vel;
+            //v[i] = v[i] + vel;
             renderer.DrawPoint(v[i].x, v[i].y);
         }
 
+        renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
+        renderer.DrawFillRect(input.GetMousePosition().x - 20, input.GetMousePosition().y - 20, 40, 40);
+
+        /*
         renderer.SetColor(rand() % 256, rand() % 256, rand() % 256);
         renderer.DrawFillRect(nu::RandomFloat(40), nu::RandomFloat(40), 50, 50);
-
-        //TODO: do these 2 later
-        renderer.SetColor(255, 255, 255, 255);
+        */
+        //renderer.SetColor(255, 255, 255, 255);
         
 
-        //TODO: make a line drawer. 
-        renderer.DrawLine(nu::RandomInt(1280), nu::RandomInt(1024), nu::RandomInt(1280), nu::RandomInt(1024));
 
 
         renderer.Present();
