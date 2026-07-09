@@ -7,7 +7,7 @@
 namespace nu
 {
 
-    bool Renderer::Initialize(const char* name, int width, int height)
+    bool Renderer::Initialize(const char* name, int width, int height) 
     {
         SDL_Init(SDL_INIT_VIDEO);
 
@@ -26,6 +26,8 @@ namespace nu
             return false;
         }
 
+        SDL_SetRenderVSync(m_renderer, 1);
+
 
         return true;
     }
@@ -38,45 +40,45 @@ namespace nu
     }
 
 
-    void Renderer::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+    void Renderer::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const
     {
         SDL_SetRenderDrawColor(m_renderer, r, g, b, a);
     }
 
-    void Renderer::SetColorFloat(float r, float g, float b, float a)
+    void Renderer::SetColorFloat(float r, float g, float b, float a) const
     {
         SDL_SetRenderDrawColorFloat(m_renderer, r, g, b, a);
     }
 
-    void Renderer::Clear()
+    void Renderer::Clear() const
     {
         SDL_RenderClear(m_renderer);
     }
 
-    void Renderer::Present()
+    void Renderer::Present() const
     {
         SDL_RenderPresent(m_renderer);
     }
 
-    void Renderer::DrawPoint(float x, float y)
+    void Renderer::DrawPoint(float x, float y) const
     {
         SDL_RenderPoint(m_renderer, x, y);
     }
 
-    void Renderer::DrawFillRect(float x, float y, float w, float h)
+    void Renderer::DrawFillRect(float x, float y, float w, float h) const
     {
         SDL_FRect rect{ x, y, w, h };
         SDL_RenderFillRect(m_renderer, &rect);
     }
 
-    void Renderer::DrawRect(float x, float y, float w, float h)
+    void Renderer::DrawRect(float x, float y, float w, float h) const
     {
         SDL_FRect rect{ x, y, w, h };
         SDL_RenderRect(m_renderer, &rect);
     }
 
     //first 2 paramters are first point, next 2 are second point.
-    void Renderer::DrawLine(int x1, int y1, int x2, int y2)
+    void Renderer::DrawLine(int x1, int y1, int x2, int y2) const
     {
         SDL_RenderLine(m_renderer, x1, y1, x2, y2);
         return;
