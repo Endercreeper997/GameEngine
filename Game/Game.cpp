@@ -15,12 +15,14 @@ struct Transform
 class Actor
 {
 public:
+    Actor() = default;
     Actor(const Transform& transform) : m_transform { transform } {}
 
     void Update(float dt)
     {
   
         m_transform.position += (m_velocity * dt);
+        m_velocity *= 0.997;
 
         m_transform.position.x = Wrap(0.0f, 1280.0f, m_transform.position.x);
         m_transform.position.y = Wrap(0.0f, 1024.0f, m_transform.position.y);
@@ -31,6 +33,16 @@ public:
         renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
         renderer.DrawFillRect(m_transform.position.x - (m_transform.scale * 0.5f), m_transform.position.y - (m_transform.scale * 0.5f), m_transform.scale, m_transform.scale);
     }
+
+    const Transform& GetTransform() { return m_transform; }
+    void SetPosition(const Vector2& position) { m_transform.position = position; }
+    void SetRotation(float rotation) { m_transform.rotation = rotation; }
+    void SetScale(float scale) { m_transform.scale = scale; }
+
+    const Vector2& GetVelocity() { return m_velocity; }
+    void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
+    
+
 
 
 protected:
@@ -52,6 +64,8 @@ int main()
     input.Initialize();
 
     nu::Time time;
+
+    Actor player{ Transform{ Vector2{ 640.5f , 512.0f }, 0.0f, 50.0f } };
 
     //std::cout << sizeof(nu::Vector2) << std::endl;
     nu::Vector2 position{ 640.5f , 512.0f };
@@ -114,21 +128,38 @@ int main()
         
         if (input.GetButtonDown(nu::Input::MouseButton::Left))
         {
-            points.push_back(input.GetMousePosition());
+            if (points.empty()) 
+            {
+                points.push_back(input.GetMousePosition());
+            }
+            else
+            {
+                Vector2 v = points.back() - input.GetMousePosition();
+                if (v.Length() > 10.0f)
+                {
+                    points.push_back(input.GetMousePosition());
+                }
+            }
         }
 
         nu::Vector2 force{ 0.0f , 0.0f };
         
-        if (input.GetKeyDown(SDL_SCANCODE_A)) velocity.x = -speed;
-        if (input.GetKeyDown(SDL_SCANCODE_D)) velocity.x = +speed;
-        if (input.GetKeyDown(SDL_SCANCODE_W)) velocity.y = -speed;
-        if (input.GetKeyDown(SDL_SCANCODE_S)) velocity.y = +speed;
+        if (input.GetKeyDown(SDL_SCANCODE_A)) force.x = -speed;
+        if (input.GetKeyDown(SDL_SCANCODE_D)) force.x = +speed;
+        if (input.GetKeyDown(SDL_SCANCODE_W)) force.y = -speed;
+        if (input.GetKeyDown(SDL_SCANCODE_S)) force.y = +speed;
 
+        player.SetVelocity(player.GetVelocity() + (force * time.GetDeltaTime()));
+
+        player.Update(time.GetDeltaTime());
+
+        /*
         velocity += (force * time.GetDeltaTime());
         position += (velocity * time.GetDeltaTime());
 
         position.x = Wrap(0.0f, 1280.0f, position.x);
-        position.y = Wrap(0.0f, 1024.0f, position.y);
+        position.y = Wrap(0.0f, 1024.0f, position.y);*/
+
 
         //RENDER
         renderer.SetColorFloat(0.0f, 0.0f, 0.0f);
@@ -137,15 +168,16 @@ int main()
 
         renderer.Clear();
 
-        for (int i = 0; i < points.size(); i++) 
+        for (int i = 0; i < (int)points.size() - 1; i++) 
         {
             renderer.SetColorFloat(nu::RandomFloat(), nu::RandomFloat(), nu::RandomFloat());
-            renderer.DrawFillRect(points[i].x, points[i].y, 10, 10);
+            renderer.DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
         }
 
         // character
-        renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
-        renderer.DrawFillRect(position.x - 20, position.y - 20, 40, 40);
+        player.Draw(renderer);
+        //renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
+        //renderer.DrawFillRect(position.x - 20, position.y - 20, 40, 40);
 
         /*
         renderer.SetColor(rand() % 256, rand() % 256, rand() % 256);
