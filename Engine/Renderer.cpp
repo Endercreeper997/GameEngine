@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Renderer.h"
+#include "Transform.h"
+#include "Model.h"
 
 #include <iostream>
 #include "Input.h"
@@ -82,6 +84,34 @@ namespace nu
     {
         SDL_RenderLine(m_renderer, x1, y1, x2, y2);
         return;
+    }
+
+    void Renderer::DrawModel(const Model& model, const Transform& transform) const
+    {
+        
+        for (auto mesh : model.GetMeshes())
+        {
+            SetColor(model.GetColor().r, model.GetColor().g, model.GetColor().b, 1.0f);
+            auto points = mesh.GetPoints();
+
+            for (int i = 0; i < points.size(); i++)
+            {
+                Vector2 v1 = points[i]; //local space
+                Vector2 v2 = points[i + 1]; //local space
+
+                // convert to world space
+                v1 *= transform.scale;
+                v2 *= transform.scale;
+
+                v1 += transform.position;
+                v2 += transform.position;
+
+
+                DrawLine(v1.x, v1.y, v2.x, v2.y);
+
+            }
+        }
+
     }
     
 }

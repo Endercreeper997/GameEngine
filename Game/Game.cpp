@@ -54,7 +54,7 @@ protected:
 
 int main()
 {
-    
+
 
     //INITIALIZATION
     nu::Renderer renderer;
@@ -65,7 +65,11 @@ int main()
 
     nu::Time time;
 
-    Actor player{ Transform{ Vector2{ 640.5f , 512.0f }, 0.0f, 50.0f } };
+    //std::vector<Vector2> points{{}}
+    Mesh mesh{ { Vector2{ -3, 3 }, Vector2{ 3, 3 }, Vector2{ 0,0 } }, Color{ 0.0f, 0.0f, 1.0f } };
+
+
+    Actor player{ Transform{ Vector2{ 640.5f , 512.0f }, 0.0f, 50.0f }, { mesh } };
 
     //std::cout << sizeof(nu::Vector2) << std::endl;
     nu::Vector2 position{ 640.5f , 512.0f };

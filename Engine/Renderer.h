@@ -17,13 +17,20 @@ namespace nu
 		void SetColorFloat(float r, float g, float b, float a = 255) const;
 
 		void DrawPoint(float x, float y) const;
+		void DrawLine(int x1, int y1, int x2, int y2) const;
 		void DrawFillRect(float x, float y, float w, float h) const;
 		void DrawRect(float x, float y, float w, float h) const;
-		void DrawLine(int x1, int y1, int x2, int y2) const;
 
+		void DrawModel(const class Mesh& model, const class Transform& transform) const;
+
+		int GetWidth() const { return m_width; }
+		int GetHeight() const { return m_height; }
 	private:
 		SDL_Window* m_window = nullptr;
 		SDL_Renderer* m_renderer = nullptr;
+
+		int m_width = 0;
+		int m_height = 0;
 	};
 }
 	
