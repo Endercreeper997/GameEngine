@@ -5,13 +5,6 @@
 //Can use this to not have to type the namespace (like nu or std) every time. 
 using namespace nu;
 
-struct Transform
-{
-    Vector2 position;
-    float rotation;
-    float scale;
-};
-
 class Actor
 {
 public:
@@ -35,19 +28,19 @@ public:
     }
 
     const Transform& GetTransform() { return m_transform; }
-    void SetPosition(const Vector2& position) { m_transform.position = position; }
+    void SetPosition(const Vector3& position) { m_transform.position = position; }
     void SetRotation(float rotation) { m_transform.rotation = rotation; }
     void SetScale(float scale) { m_transform.scale = scale; }
 
-    const Vector2& GetVelocity() { return m_velocity; }
-    void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
+    const Vector3& GetVelocity() { return m_velocity; }
+    void SetVelocity(const Vector3& velocity) { m_velocity = velocity; }
     
 
 
 
 protected:
     Transform m_transform;
-    Vector2 m_velocity{ 0,0 };
+    Vector3 m_velocity{ 0,0 };
 
 };
 
@@ -66,16 +59,16 @@ int main()
     nu::Time time;
 
     //std::vector<Vector2> points{{}}
-    Mesh mesh{ { Vector2{ -3, 3 }, Vector2{ 3, 3 }, Vector2{ 0,0 } }, Color{ 0.0f, 0.0f, 1.0f } };
+    Mesh mesh{ { Vector3{ -3, 3 }, Vector3{ 3, 3 }, Vector3{ 0,0 } }, Color{ 0.0f, 0.0f, 1.0f } };
 
 
     Actor player{ Transform{ Vector2{ 640.5f , 512.0f }, 0.0f, 50.0f }, { mesh } };
 
     //std::cout << sizeof(nu::Vector2) << std::endl;
-    nu::Vector2 position{ 640.5f , 512.0f };
-    nu::Vector2 velocity{ 0.0f , 0.0f };
+    nu::Vector3 position{ 640.5f , 512.0f };
+    nu::Vector3 velocity{ 0.0f , 0.0f };
 
-    std::vector<nu::Vector2> points;
+    std::vector<nu::Vector3> points;
 
     uint64_t ticks = SDL_GetTicks();
     uint64_t prevTicks = ticks;
@@ -88,7 +81,7 @@ int main()
         
         v.push_back({ nu::RandomFloat(1280), nu::RandomFloat(1024) });
     }*/
-    nu::Vector2 mousePosition;
+    nu::Vector3 mousePosition;
     //handle events
     SDL_Event event;
     bool quit = false;
@@ -138,7 +131,7 @@ int main()
             }
             else
             {
-                Vector2 v = points.back() - input.GetMousePosition();
+                Vector3 v = points.back() - input.GetMousePosition();
                 if (v.Length() > 10.0f)
                 {
                     points.push_back(input.GetMousePosition());
@@ -146,7 +139,7 @@ int main()
             }
         }
 
-        nu::Vector2 force{ 0.0f , 0.0f };
+        nu::Vector3 force{ 0.0f , 0.0f };
         
         if (input.GetKeyDown(SDL_SCANCODE_A)) force.x = -speed;
         if (input.GetKeyDown(SDL_SCANCODE_D)) force.x = +speed;

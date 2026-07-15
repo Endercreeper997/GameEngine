@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Vector2.h"
+#include "Vector3.h"
 #include "Random.h"
 #include "MathUtils.h"
+#include "Transform.h"
 
 //Systems
 #include "Renderer.h"
