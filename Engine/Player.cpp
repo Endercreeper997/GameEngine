@@ -1,0 +1,31 @@
+#include "Player.h"
+#include "Renderer.h"
+#include "Engine.h"
+
+void Player::Update(float dt)
+{
+    float thrust = 0.0f;
+    
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
+
+    float rotate = 0.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -100.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = 100.f;
+
+    SetRotation(m_transform.rotation + rotate * dt);
+
+
+    nu::Vector2 forward{ 1,0 };
+    nu::Vector2 velocity = forward.Rotate(m_transform.rotation * nu::DegToRad) * thrust;
+    AddVelocity(velocity * dt);
+
+
+    Actor::Update(time.GetDeltaTime());
+}
+
+void Player::Draw(const Renderer& renderer) const
+{
+	Actor::Draw(renderer);
+}
+

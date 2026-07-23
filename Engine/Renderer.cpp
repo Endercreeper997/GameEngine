@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "Transform.h"
 #include "Model.h"
+#include "MathUtils.h"
+#include "Model.h"
 
 #include <iostream>
 #include "Input.h"
@@ -88,10 +90,10 @@ namespace nu
 
     void Renderer::DrawModel(const Model& model, const Transform& transform) const
     {
-        
+
         for (auto mesh : model.GetMeshes())
         {
-            SetColor(model.GetColor().r, model.GetColor().g, model.GetColor().b, 1.0f);
+            SetColor(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b, 1.0f);
             auto points = mesh.GetPoints();
 
             for (int i = 0; i < points.size(); i++)
@@ -103,6 +105,10 @@ namespace nu
                 v1 *= transform.scale;
                 v2 *= transform.scale;
 
+                v1 = v1.Rotate(transform.rotation * DegToRad);
+                v2 = v2.Rotate(transform.rotation * DegToRad);
+
+
                 v1 += transform.position;
                 v2 += transform.position;
 
@@ -111,7 +117,5 @@ namespace nu
 
             }
         }
-
     }
-    
 }
