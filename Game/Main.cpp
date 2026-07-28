@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Assets.h"
+#include "SpaceGame.h"
 
 #include <iostream>
 #include <vector>
@@ -37,6 +38,15 @@ int main()
 
     //INITIALIZATION
     e.Initialize();
+
+    SpaceGame game;
+    game.Initialize();
+
+    Font* font = new Font();
+    font->Load("fonts/BreatheFireIii-PKLOB.ttf", 65);
+
+    Text* text = new Text(font);
+    text->Create(Engine::Get().GetRenderer(), "Hello World", Color{1, 1, 1, 1});
 
 
     //Audio stuff
@@ -160,6 +170,7 @@ int main()
         //RENDER
         Engine::Get().GetRenderer().SetColorFloat(0.0f, 0.0f, 0.0f);
 
+        text->Draw(Engine::Get().GetRenderer(), 40.0f, 40.0f);
         
 
         Engine::Get().GetRenderer().Clear();

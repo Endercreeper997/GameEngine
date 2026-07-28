@@ -5,6 +5,7 @@
 #include "Random.h"
 #include "MathUtils.h"
 #include "Transform.h"
+#include "Text.h"
 
 //Systems
 #include "Renderer.h"
@@ -12,6 +13,7 @@
 #include "GameTime.h"
 #include "Actor.h"
 #include "Scene.h"
+#include "Game.h"
 
 #include <iostream>
 #include <vector>
