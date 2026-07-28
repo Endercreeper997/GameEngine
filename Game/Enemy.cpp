@@ -39,8 +39,13 @@ void Enemy::Update(float dt)
     Actor::Update(time.GetDeltaTime());
 }
 
-void Enemy::Draw(const Renderer& renderer) const
+void Enemy::OnCollision(Actor* other)
 {
-    Actor::Draw(renderer);
+    if (other->GetTag() == "PlayerBullet")
+    {
+        m_destroyed = true;
+        other->m_destroyed = true;
+    }
 }
+
 

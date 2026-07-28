@@ -1,4 +1,5 @@
 #pragma once
+#include "Transform.h"
 #include "Model.h"
 #include "Vector2.h"
 #include "Vector3.h"
@@ -14,6 +15,8 @@ namespace nu
         std::string tag;
         Transform transform;
         Vector2 velocity{ 0.0f, 0.0f };
+        float damping{ 0.0f };
+        float lifespan{ 0 };
 
         Model model;
     };
@@ -29,6 +32,7 @@ namespace nu
             m_tag{ actorDesc.tag },
             m_transform{ actorDesc.transform },
             m_velocity{ actorDesc.velocity },
+            m_lifespan{ actorDesc.lifespan },
             m_model{ actorDesc.model }
         { }
 
@@ -38,21 +42,10 @@ namespace nu
             m_model{ model }
         { }
 
-        virtual void Update(float dt)
-        {
+        virtual void Update(float dt);
+        virtual void Draw(const Renderer& renderer);
 
-            m_transform.position += (m_velocity * dt);
-            m_velocity *= 0.997;
-
-            m_transform.position.x = Wrap(0.0f, 1280.0f, m_transform.position.x);
-            m_transform.position.y = Wrap(0.0f, 1024.0f, m_transform.position.y);
-        }
-
-        virtual void Draw(const Renderer& renderer)
-        {
-            renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
-            renderer.DrawFillRect(m_transform.position.x - (m_transform.scale * 0.5f), m_transform.position.y - (m_transform.scale * 0.5f), m_transform.scale, m_transform.scale);
-        }
+        virtual void OnCollision(Actor* other);
 
         const Transform& GetTransform() { return m_transform; }
         void SetPosition(const Vector2& position) { m_transform.position = position; }
@@ -63,10 +56,15 @@ namespace nu
         void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
         void AddVelocity(const Vector2& velocity) { m_velocity += velocity; }
 
-        const std::string& GetName();
-        const std::string& GetTag();
+        const std::string& GetName() const { return m_name };
+        const std::string& GetTag() const { return m_tag };
 
         Scene* GetScene() { return m_scene; }
+
+        float GetRadius() const;
+
+        void SetDestroyed(bool destroy = true) { m_destroyed = true; }
+        bool GetDestroyed() const { return m_destroyed; }
 
         friend Scene;
 
@@ -77,6 +75,9 @@ namespace nu
 
         Transform m_transform;
         Vector2 m_velocity{ 0, 0 };
+        float m_damping{ 0.0f };
+        float m_lifespan{ 0 };
+        bool m_destroyed = { false };
 
         Model m_model;
         Scene* m_scene{ nullptr };

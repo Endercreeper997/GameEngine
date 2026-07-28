@@ -21,6 +21,8 @@ namespace nu
 		void SetColor(const Color& color) { m_color = color; }
 		const Color& GetColor() const { return m_color; }
 
+		float GetRadius() const;
+
 	private:
 		std::vector<Vector3> m_points;
 		Color m_color{ 1.0f, 1.0f, 1.0f };

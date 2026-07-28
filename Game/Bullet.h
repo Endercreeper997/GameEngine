@@ -1,23 +1,26 @@
 
 #include "Actor.h"
 
-class Enemy : nu::Actor
+
+
+
+class Bullet : nu::Actor
 {
 public:
-	Enemy() = default;
-	Enemy(const nu::Transform& transform) :
+	Bullet() = default;
+	Bullet(const nu::Transform& transform) :
 		Actor{ transform },
 		m_speed{ speed }
 	{
 	}
-	Enemy(const nu::Transform& transform, const nu::Model& model) :
+	Bullet(const nu::Transform& transform, const nu::Model& model) :
 		Actor{ transform, model },
 		m_speed{ speed }
 	{
 	}
 
 	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
+
 
 
 private:

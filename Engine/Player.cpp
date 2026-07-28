@@ -1,9 +1,12 @@
 #include "Player.h"
+#include "Bullet.h"
+#include "Assets.h"
 #include "Renderer.h"
 #include "Engine.h"
 
 void Player::Update(float dt)
 {
+    //movement
     float thrust = 0.0f;
     
     if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
@@ -20,12 +23,31 @@ void Player::Update(float dt)
     nu::Vector2 velocity = forward.Rotate(m_transform.rotation * nu::DegToRad) * thrust;
     AddVelocity(velocity * dt);
 
+    //fire
+    if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE))
+    {
+        BulletDesc desc;
+        desc.name = "Bullet";
+        desc.tag = "PlayerBullet";
+        desc.model = assets::bulletModel;
+        desc.transform = m_transform;
+        desc.speed = 4.0f;
+        desc.lifespan = 1.0f
 
-    Actor::Update(time.GetDeltaTime());
+        Bullet* bullet = new Bullet{ desc };
+        m_scene->AddActor(bullet);
+
+    }
+
+    Actor::Update(dt);
 }
 
-void Player::Draw(const Renderer& renderer) const
+void Player::OnCollision(Actor* other)
 {
-	Actor::Draw(renderer);
+    if (other->GetName() = "Enemy")
+    {
+        SetDestroyed();
+    }
 }
+
 

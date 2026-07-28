@@ -26,7 +26,7 @@ namespace nu {
 		bool operator != (const Vector3& v) const { return (this->x != v.x && this->y != v.y && this->z !=v.z); }
 
 		Vector3 operator + (const Vector3& v) const { return Vector3{ this->x + v.x, this->y + v.y, this->z + v.z }; }
-		Vector3 operator - (const Vector3& v) const { return Vector3{ this->x - v.x, this->y - v., this->z - v.z }; }
+		Vector3 operator - (const Vector3& v) const { return Vector3{ this->x - v.x, this->y - v.y, this->z - v.z }; }
 		Vector3 operator * (const Vector3& v) const { return Vector3{ this->x * v.x, this->y * v.y, this->z * v.z }; }
 		Vector3 operator / (const Vector3& v) const { return Vector3{ this->x / v.x, this->y / v.y, this->z / v.z }; }
 

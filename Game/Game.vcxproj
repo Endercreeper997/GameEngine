@@ -109,7 +109,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\neumont\Sprint 4 Game Dev Start\C++ Programming II\C++ Projects\GameEngine\ThirdParty\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sdl3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl3.lib;sdl3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,8 +129,9 @@
   <ItemGroup>
     <ClCompile Include="..\Engine\Player.cpp" />
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="..\Engine\Player.h" />
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,15 +12,17 @@ public:
 		Actor{ transform }, 
 		m_speed{ speed }
 	{
+	
 	}
 	Player(const nu::Transform& transform, const nu::Model& model) :
 		Actor{ transform, model },
 		m_speed{ speed }
 	{
+
 	}
 
-	void Update(float dt) override;
-	void Draw(const class Renderer& renderer) const override;
+	void Update(float dt) override;	
+	void OnCollision(Actor* other);
 
 
 

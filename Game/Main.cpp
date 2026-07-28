@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 //Can use this to not have to type the namespace (like nu or std) every time. 
 using namespace nu;
@@ -14,10 +15,33 @@ using namespace nu;
 
 int main()
 {
+    /*std::map<std::string, int> students;
+    students["Aiden"] = 16;
+
+    //std::map<std::string, fmod_sound*> m_sounds;
+    // "laser" -> fmod_sound*
+
+    if (students.find("Aiden") != students.end())
+    {
+        std::cout << "found.\n";
+    }
+
+    std::cout << student["Aiden"] << std::endl;*/
+
+
+
+    SetWorkingDirectory("Assets");
+
+
     Engine& e = Engine::Get();
 
     //INITIALIZATION
     e.Initialize();
+
+
+    //Audio stuff
+
+
 
     //std::vector<Vector2> points{{}}
     Mesh mesh{ { Vector2{ -3, 3 }, Vector2{ 3, 3 }, Vector2{ 0,0 } }, Color{ 0.0f, 0.0f, 1.0f } };
@@ -64,11 +88,15 @@ int main()
     Scene scene;
 
     Player* player = new Player{ 2000.0f, Transform{ Vector2{640.0f, }};
+    //playerDesc.damping = 3.0f
+
     scene.AddActor(player);
 
     for (int i = 0; i < 20; i++)
     {
         Enemy* enemy = new Enemy{};
+        //enemyDesc.damping = 3.0f
+
         scene.AddActor(enemy);
     }
    
