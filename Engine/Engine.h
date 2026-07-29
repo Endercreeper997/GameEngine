@@ -12,6 +12,7 @@
 #include "Actor.h"
 #include "Scene.h"
 #include "Game.h"
+#include "ParticleSystem.h"
 
 
 #define ENGINE			Engine::Get()
@@ -34,6 +35,7 @@ namespace nu
 		Input& GetInput() { return m_input; }
 		Renderer& GetRenderer() { return m_renderer; }
 		Time& GetTime() { return m_time; }
+		ParticleSystem GetPS() { return m_particleSystem; }
 
 
 
@@ -43,6 +45,7 @@ namespace nu
 	private:
 		Input m_input;
 		Renderer m_renderer;
+		ParticleSystem m_particleSystem;
 
 		Time m_time;
 	};

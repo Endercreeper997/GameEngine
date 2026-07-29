@@ -4,6 +4,7 @@
 #include "Assets.h"
 #include "Renderer.h"
 #include "Engine.h"
+#include "SpaceGame.h"
 
 void Player::Update(float dt)
 {
@@ -24,6 +25,15 @@ void Player::Update(float dt)
     nu::Vector2 forward{ 1,0 };
     nu::Vector2 velocity = forward.Rotate(m_transform.rotation * nu::DegToRad) * thrust;
     AddVelocity(velocity * dt);
+
+    //particle system
+    nu::Particle particle;
+    particle.position = m_transform.position;
+    particle.color = { 1.0f, 1.0f, 1.0f };
+    particle.lifespan = nu::RandomFloat(0.5f, 1.5f);
+    particle.velocity = { nu::RandomFloat(-200.0f, 200.0f), nu::RandomFloat(-200.0f, 200.0f) };
+
+    nu::Engine::Get().GetPS().AddParticle(particle);
 
     //fire
     if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE))
@@ -50,6 +60,8 @@ void Player::Update(float dt)
     if (other->GetName() = "Enemy")
     {
         SetDestroyed();
+
+        ((SpaceGame*)m_scene->GetGame())->OnPlayerDead();
     }
 }*/
 
