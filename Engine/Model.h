@@ -18,9 +18,9 @@ namespace nu
 		}
 
 		void SetMeshes(const std::vector<Mesh>& meshes) { m_meshes = meshes; }
-		const std::vector<Mesh>& GetMeshes() { return m_meshes; }
+		const std::vector<Mesh>& GetMeshes() const { return m_meshes; }
 
-		float GetRadius() const;
+		float GetRadius() const { return m_radius; }
 		void CalculateRadius();
 
 

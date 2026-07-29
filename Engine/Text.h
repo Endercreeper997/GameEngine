@@ -1,3 +1,4 @@
+#pragma once
 #include "Font.h"
 #include "Vector3.h"
 
@@ -7,7 +8,6 @@ struct SDL_Texture;
 namespace nu
 {
 	class Renderer;
-	struct Color;
 	
 	class Text {
 	public:
@@ -16,7 +16,7 @@ namespace nu
 		~Text();
 
 		bool Create(Renderer& renderer, const std::string& text, const Vector3& color);
-		void Draw(Renderer& renderer, int x, int y);
+		void Draw(Renderer& renderer, float x, float y);
 
 	private:
 		Font* m_font{ nullptr };

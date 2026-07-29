@@ -55,20 +55,16 @@ void Player::Update(float dt)
     Actor::Update(dt);
 }
 
-/*void Player::OnCollision(Actor* other)
+void Player::OnCollision(Actor* other)
 {
-    if (other->GetName() = "Enemy")
+    if (other->GetName() == "Enemy")
     {
         SetDestroyed();
 
         ((SpaceGame*)m_scene->GetGame())->OnPlayerDead();
     }
-}*/
-
-/*void Player::Draw(const nu::Renderer& renderer) const
-{
-    Actor::Draw(renderer);
-
 }
-*/
+
+
+
 

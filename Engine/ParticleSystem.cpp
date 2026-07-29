@@ -1,5 +1,5 @@
 #pragma once
-
+#include "pch.h"
 #include "ParticleSystem.h"
 
 namespace nu
@@ -23,7 +23,7 @@ namespace nu
 		// update active particles
 		for (auto& particle : m_particles)
 		{
-			if (/*TODO: particle is not active */) continue;
+			//if (/*TODO: particle is not active */) continue;
 
 			// reduce particle.lifespan by subtracting delta time
 			// TODO: particle.lifespan -= delta time

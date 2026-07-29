@@ -9,7 +9,7 @@
 
 namespace nu
 {
-	
+#pragma once
 
 	bool Engine::Initialize() 
 	{

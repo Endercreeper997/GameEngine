@@ -31,7 +31,7 @@ namespace Assets
             },
             Color{ 0.0f, 0.0f, 1.0f } 
     };
-    Model playerModel{ std::vector<Mesh>{ mesh } };
+    Model playerModel{ std::vector<Mesh>{ playerMesh } };
 
     Mesh bulletMesh{
     {

@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Assets.h"
 #include "SpaceGame.h"
+#include "fmod.hpp"
 
 #include <iostream>
 #include <vector>
@@ -19,7 +20,7 @@ int main()
 {
 
     //INITIALIZATION
-    SetWorkingDirectory("Assets");
+    //SetWorkingDirectory("Assets");
     Engine::Get().Initialize();
   
 
@@ -28,7 +29,62 @@ int main()
 
 
     //Audio stuff
+      // create audio system
+    FMOD::System* audio;
+    FMOD::System_Create(&audio);
 
+    void* extradriverdata = nullptr;
+    audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
+
+    FMOD::Sound* sound = nullptr;
+    audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+
+    audio->playSound(sound, 0, false, nullptr);
+
+    //add extra sfx to test
+    void* extradriverdata = nullptr;
+    audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
+
+    std::vector<FMOD::Sound*> sounds;
+
+    FMOD::Sound* sound = nullptr;
+    audio->createSound("whistle.mp3", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("error.mp3", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("mario.mp3", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    //sound input test
+    if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_1))
+    {
+        audio->playSound(sounds[0], nullptr, false, nullptr);
+    }
+
+    if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_2))
+    {
+        audio->playSound(sounds[1], nullptr, false, nullptr);
+    }
+    if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_3))
+    {
+        audio->playSound(sounds[2], nullptr, false, nullptr);
+    }
+    if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_4))
+    {
+        audio->playSound(sounds[3], nullptr, false, nullptr);
+    }
+    if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_5))
+    {
+        audio->playSound(sounds[4], nullptr, false, nullptr);
+    }
 
 
     //handle events
@@ -69,6 +125,7 @@ int main()
 
         //Game
         game.Update(dt);
+        audio->update();
 
 
         //RENDER

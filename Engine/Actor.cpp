@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 #include "Renderer.h"
 #include "Mesh.h"
 #include "Actor.h"
@@ -17,7 +18,7 @@ namespace nu
 		}
 
 		m_transform.position += (m_velocity * dt);
-		m_velocity *= (1.0f / ((1.0f) + m_damping * dt);
+		m_velocity *= (1.0f / ((1.0f) + m_damping * dt));
 
 		
 		m_transform.position.x = Wrap(0.0f, 1280.0f, m_transform.position.x);

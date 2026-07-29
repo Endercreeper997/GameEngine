@@ -8,7 +8,7 @@ struct PlayerDesc : public nu::ActorDesc
 
 };
 
-class Player : nu::Actor
+class Player : public nu::Actor
 {
 public:
 	Player() = default;
@@ -33,7 +33,7 @@ public:
 	void Update(float dt) override;	
 	//void Draw(const nu::Renderer& renderer) const override;
 	void OnCollision(Actor* other);
-
+	
 
 
 private:

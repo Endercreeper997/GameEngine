@@ -104,8 +104,8 @@ namespace nu
 
             for (int i = 0; i < points.size(); i++)
             {
-                Vector3 v1 = points[i]; //local space
-                Vector3 v2 = points[i + 1]; //local space
+                Vector2 v1 = points[i]; //local space
+                Vector2 v2 = points[i + 1]; //local space
 
                 // convert to world space
                 v1 *= transform.scale;

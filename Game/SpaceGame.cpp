@@ -15,16 +15,18 @@ bool SpaceGame::Initialize()
 	m_scene = new Scene();
 	m_scene->SetGame(this);
 
+	/*
 	m_titleFont = new Font();
 	m_titleFont->Load("fonts/BreatheFireIii-PKLOB.ttf", 65);
 
 	m_titleText = new Text(m_titleFont);
-	m_titleText->Create(Engine::Get().GetRenderer(), "Hello World", Color{ 1, 1, 1, 1 });
+	m_titleText->Create(Engine::Get().GetRenderer(), "Hello World", Color{ 1, 1, 1 });
 
 	m_gameFont = new Font();
 	m_gameFont->Load("fonts/BreatheFireIii-PKLOB.ttf", 32);
 
 	m_scoreText = new Text(m_gameFont);
+	*/
 
 	//Engine::Get().GetAudio().AddSound("laser", "audio/laser.mav");
 	//Engine::Get().GetAudio().AddSound("explosion", "audio/explosion.mav");

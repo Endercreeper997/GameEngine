@@ -13,6 +13,7 @@
 #include "Scene.h"
 #include "Game.h"
 #include "ParticleSystem.h"
+#include "fmod.hpp"
 
 
 #define ENGINE			Engine::Get()
