@@ -32,6 +32,7 @@ namespace Assets
             Color{ 0.0f, 0.0f, 1.0f } 
     };
     Model playerModel{ std::vector<Mesh>{ mesh } };
+
     Mesh bulletMesh{
     {
       Vector2{ -1, -1 },
@@ -41,6 +42,17 @@ namespace Assets
     },
     Color{ 1.0f, 0.0f, 0.0f }
     };
-    Model bulletModel{ std::vector<Mesh>{ bulletMesh } }
+    Model bulletModel{ std::vector<Mesh>{ bulletMesh } };
+
+    Mesh enemyMesh{
+    {
+      Vector2{ -1, -1 },
+      Vector2{ 1, 0 },
+      Vector2{ -1, 1 },
+      Vector2{ -1, -1 },
+    },
+    Color{ 0.0f, 1.0f, 0.0f }
+    };
+    Model enemyModel{ std::vector<Mesh>{ enemyMesh } };
 
 }

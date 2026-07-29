@@ -1,16 +1,25 @@
-
 #include "Actor.h"
 
-class Enemy : nu::Actor
+
+
+struct EnemyDesc : public nu::ActorDesc
+{
+	float speed;
+};
+
+class Enemy : public nu::Actor
 {
 public:
 	Enemy() = default;
-	Enemy(const nu::Transform& transform) :
+	Enemy(const EnemyDesc& enemyDesc) :
+		Actor{ enemyDesc },
+		m_speed{ enemyDesc.speed }
+	{}
+	Enemy(float speed, const nu::Transform& transform) :
 		Actor{ transform },
 		m_speed{ speed }
-	{
-	}
-	Enemy(const nu::Transform& transform, const nu::Model& model) :
+	{}
+	Enemy(float speed, const nu::Transform& transform, const nu::Model& model) :
 		Actor{ transform, model },
 		m_speed{ speed }
 	{
@@ -22,5 +31,5 @@ public:
 
 private:
 	int m_ammo = 0;
-	float m_speed = 100.0f;
+	float m_speed = 0.0f;
 };

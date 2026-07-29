@@ -1,8 +1,6 @@
 #pragma once
 #include "Transform.h"
 #include "Model.h"
-#include "Vector2.h"
-#include "Vector3.h"
 #include <string>
 
 namespace nu 
@@ -17,7 +15,6 @@ namespace nu
         Vector2 velocity{ 0.0f, 0.0f };
         float damping{ 0.0f };
         float lifespan{ 0 };
-
         Model model;
     };
 
@@ -32,9 +29,10 @@ namespace nu
             m_tag{ actorDesc.tag },
             m_transform{ actorDesc.transform },
             m_velocity{ actorDesc.velocity },
+            m_damping{ actorDesc.damping },
             m_lifespan{ actorDesc.lifespan },
             m_model{ actorDesc.model }
-        { }
+        {};
 
         Actor(const Transform& transform) : m_transform{ transform } {}
         Actor(const Transform& transform, const Model& model) :
@@ -43,12 +41,12 @@ namespace nu
         { }
 
         virtual void Update(float dt);
-        virtual void Draw(const Renderer& renderer);
+        virtual void Draw(const class Renderer& renderer) const;
 
-        virtual void OnCollision(Actor* other);
+        virtual void OnCollision(Actor* other) {}
 
-        const Transform& GetTransform() { return m_transform; }
-        void SetPosition(const Vector2& position) { m_transform.position = position; }
+        const Transform& GetTransform() const { return m_transform; }
+        void SetPosition(Vector2& position) { m_transform.position = position; }
         void SetRotation(float rotation) { m_transform.rotation = rotation; }
         void SetScale(float scale) { m_transform.scale = scale; }
 
@@ -56,8 +54,8 @@ namespace nu
         void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
         void AddVelocity(const Vector2& velocity) { m_velocity += velocity; }
 
-        const std::string& GetName() const { return m_name };
-        const std::string& GetTag() const { return m_tag };
+        std::string& GetName() { return m_name; }
+        std::string& GetTag() { return m_tag; }
 
         Scene* GetScene() { return m_scene; }
 

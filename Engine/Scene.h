@@ -10,7 +10,7 @@ namespace nu
 	class Scene
 	{
 	public:
-		void AddActor(Actor* actor) { m_actors.push_back(actor); }
+		void AddActor(Actor* actor);
 
 		void Update(float dt);
 		void Draw(const class Renderer& renderer);

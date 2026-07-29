@@ -1,3 +1,4 @@
+#pragma once
 #include "Enemy.h"
 #include "Renderer.h"
 #include "Engine.h"
@@ -8,6 +9,7 @@ void Enemy::Update(float dt)
     Player* player = m_scene->GetActorByName<Player>("Player");
     if (player)
     {
+        //TODO: fix this
         nu::Vector2 direction = player->GetTransform().position - m_transform.position;
         float rotation = direction.Angle();
         SetRotation(rotation * nu::RadToDeg);
@@ -19,32 +21,15 @@ void Enemy::Update(float dt)
 
 
 
-    float thrust = 0.0f;
-
-    //if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
-    //if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
-
-    float rotate = 0.0f;
-    //if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -100.0f;
-    //if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = 100.f;
-
-    //SetRotation(m_transform.rotation + rotate * dt);
-
-
-    nu::Vector2 forward{ 1,0 };
-    nu::Vector2 velocity = forward.Rotate(m_transform.rotation * nu::DegToRad) * thrust;
-    AddVelocity(velocity * dt);
-
-
-    Actor::Update(time.GetDeltaTime());
+    Actor::Update(dt);
 }
 
 void Enemy::OnCollision(Actor* other)
 {
     if (other->GetTag() == "PlayerBullet")
     {
-        m_destroyed = true;
-        other->m_destroyed = true;
+        SetDestroyed();
+        other->SetDestroyed();
     }
 }
 

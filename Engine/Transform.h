@@ -6,7 +6,7 @@ namespace nu
 
     struct Transform
     {
-        Vector3 position;
+        Vector2 position;
         float rotation;
         float scale;
     };

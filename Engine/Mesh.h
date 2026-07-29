@@ -10,7 +10,11 @@ namespace nu
 	{
 	public:
 		Mesh() = default;
-		Mesh(const std::vector<Vector3>& points, const Color& color) :
+		Mesh(const std::vector<Vector2>& points) :
+			m_points{ points }
+		{ }
+
+		Mesh(const std::vector<Vector2>& points, const Color& color) :
 			m_points{ points },
 			m_color{ color }
 		{ }
@@ -24,7 +28,7 @@ namespace nu
 		float GetRadius() const;
 
 	private:
-		std::vector<Vector3> m_points;
+		std::vector<Vector2> m_points;
 		Color m_color{ 1.0f, 1.0f, 1.0f };
 	};
 

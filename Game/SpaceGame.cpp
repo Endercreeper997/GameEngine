@@ -37,14 +37,14 @@ void SpaceGame::Update(float dt)
 	{
 		PlayerDesc playerDesc;
 		playerDesc.name = "Player";
-		playerDesc.model = assets::playerModel;
+		playerDesc.model = Assets::playerModel;
 		playerDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
 		playerDesc.velocity = Vector2{ 0.0f, 0.0f };
 		playerDesc.damping = 3.0f;
 		playerDesc.speed = 2000.0f;
 
 		Player* player = new Player{ playerDesc };
-		m_scene->AddActor(player);
+		scene.AddActor(player);
 
 	}
 		break;

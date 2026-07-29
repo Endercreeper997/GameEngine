@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include <map>
 
 //Can use this to not have to type the namespace (like nu or std) every time. 
@@ -16,28 +17,11 @@ using namespace nu;
 
 int main()
 {
-    /*std::map<std::string, int> students;
-    students["Aiden"] = 16;
-
-    //std::map<std::string, fmod_sound*> m_sounds;
-    // "laser" -> fmod_sound*
-
-    if (students.find("Aiden") != students.end())
-    {
-        std::cout << "found.\n";
-    }
-
-    std::cout << student["Aiden"] << std::endl;*/
-
-
-
-    SetWorkingDirectory("Assets");
-
-
-    Engine& e = Engine::Get();
 
     //INITIALIZATION
-    e.Initialize();
+    SetWorkingDirectory("Assets");
+    Engine::Get().Initialize();
+  
 
     SpaceGame game;
     game.Initialize();
@@ -52,64 +36,17 @@ int main()
     //Audio stuff
 
 
-
-    //std::vector<Vector2> points{{}}
-    Mesh mesh{ { Vector2{ -3, 3 }, Vector2{ 3, 3 }, Vector2{ 0,0 } }, Color{ 0.0f, 0.0f, 1.0f } };
-    Player player{ Transform{ Vector2{ 640.5f , 512.0f }, 0.0f, 50.0f }, { mesh } };
-
-    //std::cout << sizeof(nu::Vector2) << std::endl;
-    nu::Vector2 position{ 640.5f , 512.0f };
-    nu::Vector2 velocity{ 0.0f , 0.0f };
-
-    std::vector<nu::Vector2> points;
-
-    uint64_t ticks = SDL_GetTicks();
-    uint64_t prevTicks = ticks;
-    float speed = 400.0f;
-    
-    
-
-    /*for (int i = 0; i < 300; i++) 
-    {
-        
-        v.push_back({ nu::RandomFloat(1280), nu::RandomFloat(1024) });
-    }*/
-    nu::Vector2 mousePosition;
-    //handle events
-    SDL_Event event;
-   
-    // Define a rectangle
-    SDL_FRect greenSquare{ 270, 190, 200, 200 };
-
-
-
-
-    //mesh / model
-    //std::vector<Vector2> points{{}}
-    /* Color Vector(R, G, B)
-    Vector2{ 1.0, 0.0, 0.0 },
-
-        // Connected Lines
-    
-        */
-
-    
-
+    //Player setup
     Scene scene;
 
-    Player* player = new Player{ 2000.0f, Transform{ Vector2{640.0f, }};
-    //playerDesc.damping = 3.0f
 
-    scene.AddActor(player);
+    //handle events
+    SDL_Event e;
 
-    for (int i = 0; i < 20; i++)
-    {
-        Enemy* enemy = new Enemy{};
-        //enemyDesc.damping = 3.0f
-
-        scene.AddActor(enemy);
-    }
+    
+    nu::Vector2 mousePosition;
    
+
 
 
     //photoshop
@@ -117,16 +54,16 @@ int main()
 
     //MAIN LOOP
     bool quit = false;
+
     while (!quit) 
     {
         //UPDATE
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT) 
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_EVENT_QUIT) 
             {
                 quit = true;
             }
-            if (event.type == SDL_EVENT_KEY_DOWN && event.key.scancode == SDL_SCANCODE_ESCAPE)
+            if (e.type == SDL_EVENT_KEY_DOWN && e.key.scancode == SDL_SCANCODE_ESCAPE)
             {
                 quit = true;
             }
@@ -134,11 +71,14 @@ int main()
 
         //engine update
         Engine::Get().Update();
+        float dt = Engine::Get().GetTime().GetDeltaTime();
 
-        player.SetRotation(player.GetTransform().rotation + (Engine::Get().GetTime().GetDeltaTime()));
+        game.Update(dt);
         scene.Update(dt);
 
         
+        //painting stuff
+        /*
         if (Engine::Get().GetInput().GetButtonDown(nu::Input::MouseButton::Left))
         {
             if (points.empty()) 
@@ -154,7 +94,7 @@ int main()
                 }
             }
         }
-
+        */
         
         
         
@@ -169,7 +109,11 @@ int main()
 
         //RENDER
         Engine::Get().GetRenderer().SetColorFloat(0.0f, 0.0f, 0.0f);
+        Engine::Get().GetRenderer().Clear();
 
+
+        game.Draw(Engine::Get().GetRenderer());
+        scene.Draw(Engine::Get().GetRenderer());
         text->Draw(Engine::Get().GetRenderer(), 40.0f, 40.0f);
         
 
@@ -181,13 +125,12 @@ int main()
             Engine::Get().GetRenderer().DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
         }
 
-        // character
-        scene.Draw(Engine::Get().GetRenderer());
 
         Engine::Get().GetRenderer().Present();
     }
    
     //SHUTDOWN
+    Engine::Get().Shutdown();
 
     return 0;
 
