@@ -5,7 +5,8 @@
 
 struct EnemyDesc : public nu::ActorDesc
 {
-	float speed;
+	float speed{ 0.0f };
+	float health{ 1.0f };
 };
 
 class Enemy : public nu::Actor
@@ -14,7 +15,8 @@ public:
 	Enemy() = default;
 	Enemy(const EnemyDesc& enemyDesc) :
 		Actor{ enemyDesc },
-		m_speed{ enemyDesc.speed }
+		m_speed{ enemyDesc.speed },
+		m_health{ enemyDesc.health }
 	{}
 	Enemy(float speed, const nu::Transform& transform) :
 		Actor{ transform },
@@ -33,4 +35,5 @@ public:
 private:
 	int m_ammo = 0;
 	float m_speed = 0.0f;
+	float m_health = 1.0f;
 };

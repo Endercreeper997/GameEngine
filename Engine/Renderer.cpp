@@ -102,7 +102,7 @@ namespace nu
             SetColor(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b, 1.0f);
             auto points = mesh.GetPoints();
 
-            for (int i = 0; i < points.size(); i++)
+            for (int i = 0; i < points.size() - 1; i++)
             {
                 Vector2 v1 = points[i]; //local space
                 Vector2 v2 = points[i + 1]; //local space

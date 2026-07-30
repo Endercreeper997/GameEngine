@@ -6,6 +6,7 @@
 
 namespace nu
 {
+	
 
 	class Scene
 	{
@@ -26,10 +27,10 @@ namespace nu
 		void UpdateCollisions();
 
 	private:
-		std::vector<Actor*> m_actors;
-		std::vector<Actor*> m_pendingActors;
+		std::vector<Actor*> m_actors = { };
+		std::vector<Actor*> m_pendingActors = { };
 
-		class Game* m_game;
+		class Game* m_game = nullptr;
 
 	};
 

@@ -64,7 +64,7 @@ int main()
 
     // write to text file
     std::cout << "Text File Writing:\n";
-    nu::WriteTextFile("test.txt", "Hello, World!", true);
+    nu::WriteTextFile("test.txt\n", "Hello, World!\n", true);
     if (nu::ReadTextFile("test.txt", str))
     {
         std::cout << str << "\n";

@@ -15,7 +15,7 @@ bool SpaceGame::Initialize()
 	m_scene = new Scene();
 	m_scene->SetGame(this);
 
-	/*
+	
 	m_titleFont = new Font();
 	m_titleFont->Load("fonts/BreatheFireIii-PKLOB.ttf", 65);
 
@@ -26,10 +26,14 @@ bool SpaceGame::Initialize()
 	m_gameFont->Load("fonts/BreatheFireIii-PKLOB.ttf", 32);
 
 	m_scoreText = new Text(m_gameFont);
-	*/
+
+	m_livesText = new Text(m_gameFont);
+	
 
 	//Engine::Get().GetAudio().AddSound("laser", "audio/laser.mav");
 	//Engine::Get().GetAudio().AddSound("explosion", "audio/explosion.mav");
+	//Engine::Get().GetAudio().AddSound("music", "audio/gameMusic.mav");
+	//Engine::Get().GetAudio().PlaySound("music");
 
 	return true;
 }
@@ -150,15 +154,30 @@ void SpaceGame::SpawnPlayer()
 
 void SpaceGame::SpawnEnemy()
 {
-	
-	EnemyDesc enemyDesc;
-	enemyDesc.name = "Player";
-	enemyDesc.model = Assets::playerModel;
-	enemyDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
-	enemyDesc.velocity = Vector2{ 0.0f, 0.0f };
-	enemyDesc.damping = 3.0f;
-	enemyDesc.speed = 2000.0f;
+	int enemyIndex = 0;
 
-	Enemy* enemy = new Enemy{ enemyDesc };
-	m_scene->AddActor(enemy);
+	if (enemyIndex = 0) {
+		EnemyDesc enemyDesc;
+		enemyDesc.name = "Enemy";
+		enemyDesc.model = Assets::enemyModel;
+		enemyDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
+		enemyDesc.velocity = Vector2{ 0.0f, 0.0f };
+		enemyDesc.damping = 3.0f;
+		enemyDesc.speed = 1000.0f;
+
+		Enemy* enemy = new Enemy{ enemyDesc };
+		m_scene->AddActor(enemy);
+	}
+	else if (enemyIndex = 1) {
+		EnemyDesc enemyDesc;
+		enemyDesc.name = "Enemy";
+		enemyDesc.model = Assets::enemyModel2;
+		enemyDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
+		enemyDesc.velocity = Vector2{ 0.0f, 0.0f };
+		enemyDesc.damping = 3.0f;
+		enemyDesc.speed = 1000.0f;
+
+		Enemy* enemy = new Enemy{ enemyDesc };
+		m_scene->AddActor(enemy);
+	}
 }

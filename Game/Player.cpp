@@ -16,8 +16,8 @@ void Player::Update(float dt)
     if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
 
     float rotate = 0.0f;
-    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -100.0f;
-    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = 100.f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -180.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = 180.f;
 
     SetRotation(m_transform.rotation + rotate * dt);
 
@@ -27,13 +27,21 @@ void Player::Update(float dt)
     AddVelocity(velocity * dt);
 
     //particle system
-    nu::Particle particle;
-    particle.position = m_transform.position;
-    particle.color = { 1.0f, 1.0f, 1.0f };
-    particle.lifespan = nu::RandomFloat(0.5f, 1.5f);
-    particle.velocity = { nu::RandomFloat(-200.0f, 200.0f), nu::RandomFloat(-200.0f, 200.0f) };
+    if (thrust)
+    {
+        nu::Particle particle;
 
-    nu::Engine::Get().GetPS().AddParticle(particle);
+        nu::Vector2 offset{ -20.0f, 0.0f };
+        offset = offset.Rotate(m_transform.rotation * nu::DegToRad);
+        particle.position = m_transform.position;
+
+        nu::Color colors[3] = { { 1.0f, 1.0f, 1.0f}, { 1.0f, 0.0f, 0.0f}, { 0.0f, 1.0f, 1.0f} };
+        particle.color = colors[nu::RandomInt(3)];
+        particle.lifespan = nu::RandomFloat(0.5f, 1.5f);
+        particle.velocity = nu::Vector2{ nu::RandomFloat( - 30.0f, -100), 0.0f}.Rotate((m_transform.rotation + nu::RandomInt(-10, 10)) * nu::DegToRad);
+
+        nu::Engine::Get().GetPS().AddParticle(particle);
+    }
 
     //fire
     if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE))
@@ -43,13 +51,31 @@ void Player::Update(float dt)
         desc.tag = "PlayerBullet";
         desc.model = Assets::bulletModel;
         desc.transform = m_transform;
+        desc.transform.scale = 3.0f;
         desc.damping = 3.0f;
         desc.speed = 4.0f;
         desc.lifespan = 1.0f;
 
+        //create bullet
         Bullet* bullet = new Bullet{ desc };
         m_scene->AddActor(bullet);
 
+        desc.transform.rotation -= 20.0f;
+        bullet = new Bullet{ desc };
+        m_scene->AddActor(bullet);
+
+        desc.transform.rotation += 20.0f;
+        bullet = new Bullet{ desc };
+        m_scene->AddActor(bullet);
+    }
+
+    //bullet time
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_X))
+    {
+        nu::Engine::Get().GetTime().SetTimeScale(0.5f);
+    }
+    else {
+        nu::Engine::Get().GetTime().SetTimeScale(1.0f);
     }
 
     Actor::Update(dt);
