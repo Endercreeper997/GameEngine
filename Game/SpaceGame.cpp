@@ -57,6 +57,7 @@ void SpaceGame::Update(float dt)
 		break;
 	case SpaceGame::GameState::StartLevel:
 	{
+		m_spawnTimer = m_spawnTime;
 		m_stateTimer -= dt;
 		if (m_stateTimer <= 0)
 		{
@@ -70,7 +71,7 @@ void SpaceGame::Update(float dt)
 		break;
 	}
 	case SpaceGame::GameState::Game:
-		m_spawnTimer = m_spawnTime;
+		
 		m_spawnTimer -= dt;
 		if (m_spawnTimer <= 0.0f)
 		{
@@ -116,10 +117,12 @@ void SpaceGame::Draw(nu::Renderer& renderer)
 	case SpaceGame::GameState::Game:
 		//draw score / lives
 		m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
-		m_scoreText->Draw(renderer, 30, 30);
+		m_scoreText->Draw(renderer, 20, 30);
 
 		m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
-		m_livesText->Draw(renderer, renderer.GetWidth() - 60, 30);
+		m_livesText->Draw(renderer, 700, 30);
+
+		
 		break;
 	case SpaceGame::GameState::GameOver:
 		break;

@@ -99,7 +99,7 @@ namespace nu
 
         for (auto mesh : model.GetMeshes())
         {
-            SetColor(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b, 1.0f);
+            SetColorFloat(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b, 1.0f);
             auto points = mesh.GetPoints();
 
             for (int i = 0; i < points.size() - 1; i++)

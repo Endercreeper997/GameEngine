@@ -53,7 +53,7 @@ void Player::Update(float dt)
         desc.transform = m_transform;
         desc.transform.scale = 3.0f;
         desc.damping = 3.0f;
-        desc.speed = 4.0f;
+        desc.speed = 400.0f;
         desc.lifespan = 1.0f;
 
         //create bullet

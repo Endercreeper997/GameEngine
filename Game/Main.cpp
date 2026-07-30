@@ -145,15 +145,6 @@ int main()
     SDL_Event e;
 
     
-    nu::Vector2 mousePosition;
-  
-    //photoshop
-    std::vector<Vector2> points;
-
-
-
-
-
 
 
     //MAIN LOOP
