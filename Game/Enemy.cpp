@@ -40,7 +40,7 @@ void Enemy::OnCollision(Actor* other)
 			((SpaceGame*)m_scene->GetGame())->AddPoints(100);
 
 			//add audio for explosion death
-			//nu::Engine::Get().GetAudio().PlaySound
+			nu::Engine::Get().GetAudio().PlaySound("test");
 
 			// create particle explosion
 			for (int i = 0; i < 100; i++)

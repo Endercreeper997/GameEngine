@@ -15,7 +15,7 @@ namespace nu
 	void ParticleSystem::Shutdown()
 	{
 		// clear all particles
-		// TODO: clear() particles
+		m_particles.clear();
 	}
 
 	void ParticleSystem::Update(float dt)
@@ -23,16 +23,19 @@ namespace nu
 		// update active particles
 		for (auto& particle : m_particles)
 		{
-			//if (/*TODO: particle is not active */) continue;
+			if (!particle.active) continue;
 
 			// reduce particle.lifespan by subtracting delta time
-			// TODO: particle.lifespan -= delta time
+			particle.lifespan -= dt;
 
 			// set active if (particle.lifespan > 0);
-			// TODO: particle.active = particle lifespan > 0
+			if (particle.lifespan > 0) {
+				particle.active;
+			}
 
 			// update position with velocity (multiply by dt)
-			// TODO: update position += with particle velocity * delta time
+			//TODO: update position += with particle velocity * delta time
+			particle.position += particle.velocity * dt;
 		}
 	}
 
@@ -46,6 +49,8 @@ namespace nu
 				// set particle color and draw point at current position
 				// TODO: set color with particle color
 				// TODO: draw point with particle position
+				renderer.SetColorFloat(particle.color.r, particle.color.g, particle.color.b, 1);
+				renderer.DrawPoint(particle.position.x, particle.position.y);
 			}
 		}
 	}

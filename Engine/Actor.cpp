@@ -34,10 +34,6 @@ namespace nu
 		renderer.DrawModel(m_model, m_transform);
 
 
-		/*for (int i = 0; i < m_model.GetMeshes().size() - 1; i++)
-		{
-			renderer.SetColor(m_model.GetMeshes().at(i).GetColor().r, m_model.GetMeshes().at(i).GetColor().g, m_model.GetMeshes().at(i).GetColor().b, 1);
-		}*/
 		
 
 	}

@@ -38,7 +38,7 @@ namespace nu
 		Input& GetInput() { return m_input; }
 		Renderer& GetRenderer() { return m_renderer; }
 		Time& GetTime() { return m_time; }
-		ParticleSystem GetPS() { return m_particleSystem; }
+		ParticleSystem& GetPS() { return m_particleSystem; }
 
 		Audio& GetAudio() { return m_audio; }
 

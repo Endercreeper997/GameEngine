@@ -125,6 +125,7 @@ void SpaceGame::Draw(nu::Renderer& renderer)
 		
 		break;
 	case SpaceGame::GameState::GameOver:
+		
 		break;
 	default:
 		break;
