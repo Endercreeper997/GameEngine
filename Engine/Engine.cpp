@@ -15,7 +15,7 @@ namespace nu
 	{
 		m_renderer.Initialize("Game Engine", 1280, 1024);
 		m_particleSystem.Initialize();
-		//audio
+		m_audio.Initialize();
 		m_input.Initialize();
 
 
@@ -24,7 +24,7 @@ namespace nu
 	void Engine::Shutdown()
 	{
 		m_input.Shutdown();
-		//audio
+		m_audio.Shutdown();
 		m_renderer.Shutdown();
 		m_particleSystem.Shutdown();
 	}
@@ -33,6 +33,7 @@ namespace nu
 	{
 		m_time.Tick();
 		m_input.Update();
+		m_audio.Update();
 		m_particleSystem.Update(m_time.GetDeltaTime());
 	}
 }

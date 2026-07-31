@@ -149,7 +149,7 @@ void SpaceGame::SpawnPlayer()
 	playerDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
 	playerDesc.velocity = Vector2{ 0.0f, 0.0f };
 	playerDesc.damping = 3.0f;
-	playerDesc.speed = 2000.0f;
+	playerDesc.speed = 2500.0f;
 
 	Player* player = new Player{ playerDesc };
 	m_scene->AddActor(player);
@@ -163,24 +163,24 @@ void SpaceGame::SpawnEnemy()
 		EnemyDesc enemyDesc;
 		enemyDesc.name = "Enemy";
 		enemyDesc.model = Assets::enemyModel;
-		enemyDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
+		enemyDesc.transform = Transform{ Vector2{ RandomFloat(0, 1000.0f), RandomFloat(0, 800.f) }, 0.0f, 15.0f};
 		enemyDesc.velocity = Vector2{ 0.0f, 0.0f };
 		enemyDesc.damping = 3.0f;
-		enemyDesc.speed = 1000.0f;
+		enemyDesc.speed = 800.0f;
 
 		Enemy* enemy = new Enemy{ enemyDesc };
 		m_scene->AddActor(enemy);
 	}
 	else if (enemyIndex = 1) {
-		EnemyDesc enemyDesc;
-		enemyDesc.name = "Enemy";
-		enemyDesc.model = Assets::enemyModel2;
-		enemyDesc.transform = Transform{ Vector2{ 640.0f, 512.0f }, 0.0f, 15.0f };
-		enemyDesc.velocity = Vector2{ 0.0f, 0.0f };
-		enemyDesc.damping = 3.0f;
-		enemyDesc.speed = 1000.0f;
+		EnemyDesc enemyDesc2;
+		enemyDesc2.name = "Enemy";
+		enemyDesc2.model = Assets::enemyModel2;
+		enemyDesc2.transform = Transform{ Vector2{ RandomFloat(0, 1000.0f), RandomFloat(0, 800.f) }, 0.0f, 15.0f };
+		enemyDesc2.velocity = Vector2{ 0.0f, 0.0f };
+		enemyDesc2.damping = 3.0f;
+		enemyDesc2.speed = 850.0f;
 
-		Enemy* enemy = new Enemy{ enemyDesc };
-		m_scene->AddActor(enemy);
+		Enemy* enemy2 = new Enemy{ enemyDesc2 };
+		m_scene->AddActor(enemy2);
 	}
 }

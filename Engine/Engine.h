@@ -15,6 +15,7 @@
 #include "ParticleSystem.h"
 #include "fmod.hpp"
 #include "File.h"
+#include "Audio.h"
 
 
 #define ENGINE			Engine::Get()
@@ -39,6 +40,8 @@ namespace nu
 		Time& GetTime() { return m_time; }
 		ParticleSystem GetPS() { return m_particleSystem; }
 
+		Audio& GetAudio() { return m_audio; }
+
 
 
 	private:
@@ -48,6 +51,7 @@ namespace nu
 		Input m_input;
 		Renderer m_renderer;
 		ParticleSystem m_particleSystem;
+		Audio m_audio;
 
 		Time m_time;
 	};
