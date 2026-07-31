@@ -1,4 +1,5 @@
 #include "Assets.h"
+#include "Random.h"
 using namespace nu;
 
 namespace Assets
@@ -54,5 +55,25 @@ namespace Assets
     Color{ 1.0f, 1.0f, 0.0f }
     };
     Model enemyModel2{ std::vector<Mesh>{ enemyMesh2 } };
+
+
+    Mesh pickupMesh{
+       {
+            // Connected Lines
+            { 2, 2 },
+            { 5, 0 },
+            { 2, -2 },
+            { -3, -4 },
+            { -3, -3 },
+            { 1, -1 },
+            { -3, 0 },
+            { 1, 1 },
+            { -3, 3 },
+            { -3, 4 },
+            { 2, 2 },
+                },
+                Color{ nu::RandomFloat(1.0f), nu::RandomFloat(1.0f), nu::RandomFloat(1.0f)}
+    };
+    Model pickupModel{ std::vector<Mesh>{ pickupMesh } };
 
 }

@@ -8,7 +8,19 @@
 
 void Player::Update(float dt)
 {
-    m_speed = 800.0f;
+    //check for a boost
+    if (m_speedBoost) {
+        m_speed = 3000.0f;
+        m_boostTimer--;
+    }
+    else {
+        m_speed = 800.0f;
+    }
+    if (m_boostTimer <= 0) {
+        m_speedBoost = false;
+        m_boostTimer = 100;
+    }
+    
     //movement
     float thrust = 0.0f;
 
@@ -46,6 +58,7 @@ void Player::Update(float dt)
     //fire
     if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE))
     {
+        nu::Engine::Get().GetAudio().PlaySound("duck");
         BulletDesc desc;
         desc.name = "Bullet";
         desc.tag = "PlayerBullet";
@@ -83,11 +96,16 @@ void Player::Update(float dt)
 
 void Player::OnCollision(Actor* other)
 {
-    if (other->GetName() == "Enemy")
+    if (other->GetName() == "Enemy" || other->GetName() == "EnemyBoss")
     {
         SetDestroyed();
 
         ((SpaceGame*)m_scene->GetGame())->OnPlayerDead();
+    }
+    if (other->GetName() == "Pickup")
+    {
+        other->SetDestroyed();
+        m_speedBoost = true;
     }
 }
 

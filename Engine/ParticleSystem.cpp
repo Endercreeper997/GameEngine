@@ -32,6 +32,9 @@ namespace nu
 			if (particle.lifespan > 0) {
 				particle.active;
 			}
+			else {
+				particle.active = false;
+			}
 
 			// update position with velocity (multiply by dt)
 			//TODO: update position += with particle velocity * delta time

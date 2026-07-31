@@ -83,8 +83,7 @@ int main()
     //audio test
 
 
-    Engine::Get().GetAudio().AddSound("test", "test.wav");
-
+   
 
 
     //handle events

@@ -32,6 +32,7 @@ public:
 private:
 	void SpawnPlayer();
 	void SpawnEnemy();
+	void SpawnSpeedPickup();
 
 
 private:
@@ -40,8 +41,15 @@ private:
 
 	float m_spawnTimer = 0.0f;
 	float m_spawnTime = 0.0f;
+	float m_pickupTimer = 0.0f;
+	float m_pickupTime = 0.0f;
 
 	float m_stateTimer = 0.0f;
+
+	int m_bossMarker = 3;
+	int m_enemiesSpawned = 0;
+	
+	
 
 	GameState m_gameState = GameState::Title;
 
